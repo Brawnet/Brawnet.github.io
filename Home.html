@@ -4,100 +4,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Sederhana</title>
+    <title>CryptoCoin - Landing Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-color: #00aaff;
+            --secondary-color: #0a192f;
+            --text-color: #ccd6f6;
+            --dark-bg: #0a192f;
+            --light-bg: #112240;
+            --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .container {
-            width: 80%;
+            max-width: 1100px;
             margin: auto;
+            padding: 0 20px;
             overflow: hidden;
         }
 
         header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #0779e4 3px solid;
+            background: var(--dark-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 {
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .section {
+            padding: 60px 0;
             text-align: center;
-            margin: 0;
-            font-size: 24px;
         }
 
-        nav {
-            background: #444;
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             color: #fff;
-            padding: 10px 0;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        #hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        nav a {
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary-color);
             color: #fff;
             text-decoration: none;
-            padding: 5px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        nav a:hover {
-            background: #0779e4;
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #0088cc;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
             color: #fff;
+            margin-bottom: 10px;
         }
 
-        .main-content {
+        #roadmap .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 0;
+        }
+
+        #roadmap .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--light-bg);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -8px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            background: var(--light-bg);
             padding: 20px;
-            background: #fff;
-            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
         }
 
         footer {
-            background: #333;
-            color: #fff;
+            background: var(--light-bg);
             text-align: center;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            /* Sembunyikan nav di mobile untuk simpel */
+            #roadmap .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 20px;
+                text-align: left !important;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 2px;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <header>
         <div class="container">
-            <h1>Selamat Datang di Website Saya</h1>
+            <a href="#" class="logo">CryptoCoin</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                    <li><a href="#contact">Komunitas</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <a href="#">Beranda</a>
-            <a href="#">Tentang</a>
-            <a href="#">Layanan</a>
-            <a href="#">Kontak</a>
-        </div>
-    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1>Masa Depan Keuangan Terdesentralisasi</h1>
+                <p>CryptoCoin adalah platform blockchain yang cepat, aman, dan dapat diskalakan yang dirancang untuk
+                    aplikasi dunia nyata.</p>
+                <div>
+                    <a href="#" class="btn">Beli Sekarang</a>
+                    <a href="#" class="btn btn-secondary">Whitepaper</a>
+                </div>
+            </div>
+        </section>
 
-    <main class="container">
-        <article class="main-content">
-            <h2>Judul Artikel Utama</h2>
-            <p>Ini adalah paragraf pembuka untuk website sederhana Anda. Anda dapat mengubah teks ini sesuai dengan
-                kebutuhan Anda. HTML menyediakan struktur dasar, dan CSS digunakan untuk styling. ANJING</p>
-            <p>Anda bisa menambahkan lebih banyak paragraf, gambar, atau elemen lain di sini untuk membuat halaman Anda
-                lebih kaya konten.</p>
-        </article>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2>Tentang CryptoCoin</h2>
+                <p>CryptoCoin lahir dari visi untuk menciptakan sistem keuangan yang lebih terbuka, transparan, dan
+                    dapat diakses oleh semua orang. Kami memanfaatkan teknologi blockchain canggih untuk menyediakan
+                    transaksi yang hampir instan dengan biaya yang sangat rendah, tanpa mengorbankan keamanan atau
+                    desentralisasi.</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Fitur Unggulan</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Transaksi Cepat</h3>
+                        <p>Nikmati konfirmasi transaksi dalam hitungan detik, bukan menit. Sempurna untuk pembayaran
+                            sehari-hari.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Biaya Rendah</h3>
+                        <p>Biaya transaksi yang sangat rendah memungkinkan micro-payment dan penggunaan yang efisien.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Keamanan Terjamin</h3>
+                        <p>Dibangun di atas protokol konsensus yang kuat dan diaudit untuk memastikan keamanan dana
+                            Anda.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Dapat Diskalakan</h3>
+                        <p>Arsitektur kami dirancang untuk menangani ribuan transaksi per detik untuk adopsi massal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2>Roadmap Proyek</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Q1 2024 - Peluncuran</h3>
+                            <p>Peluncuran jaringan utama (mainnet) dan token CryptoCoin. Publikasi whitepaper resmi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Q2 2024 - Ekosistem</h3>
+                            <p>Peluncuran dompet seluler (mobile wallet) untuk Android & iOS. Kemitraan strategis
+                                pertama.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Q3 2024 - Smart Contract</h3>
+                            <p>Implementasi fungsionalitas smart contract untuk memungkinkan pengembangan dApps.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Q4 2024 - Tata Kelola</h3>
+                            <p>Pengenalan sistem tata kelola terdesentralisasi (DAO) untuk pemegang token.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/Community Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Bergabung dengan Komunitas Kami</h2>
+                <p>Tetap terhubung dan dapatkan pembaruan terbaru dengan mengikuti saluran sosial media kami.</p>
+                <a href="#" class="btn">Join Telegram</a>
+                <a href="#" class="btn btn-secondary">Follow Twitter</a>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>Hak Cipta &copy; 2023 - Website Sederhana</p>
+        <div class="container">
+            <p>&copy; 2024 CryptoCoin. Semua Hak Cipta Dilindungi.</p>
+        </div>
     </footer>
+
 </body>
 
 </html>
